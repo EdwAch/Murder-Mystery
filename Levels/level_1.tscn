@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cty23o1lxhsn"]
+
+[ext_resource type="Script" uid="uid://e312i4h4n3h4" path="res://Scripts/PlayerController.cs" id="1_n0qsc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_80fn0"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_80fn0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dilhk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_80fn0"]
+material = SubResource("StandardMaterial3D_dilhk")
+
+[node name="Node3D" type="Node3D" unique_id=1097642956]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=43094350]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=162770411]
+shape = SubResource("BoxShape3D_80fn0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=948782501]
+mesh = SubResource("BoxMesh_80fn0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=464912323]
+transform = Transform3D(1, 0, 0, 0, 0.5165352, 0.8562659, 0, -0.8562659, 0.5165352, 0, 8.226968, 3.8314428)
+shadow_enabled = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1566884832 node_paths=PackedStringArray("_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3977733, 0)
+script = ExtResource("1_n0qsc")
+_speed = 10.0
+_jumpVelocity = 5.0
+_gravity = 9.8
+_mouseSensitivity = 0.003
+_camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=859540483]
+shape = SubResource("CapsuleShape3D_80fn0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=2001896597]
+mesh = SubResource("CapsuleMesh_80fn0")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1429571666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
