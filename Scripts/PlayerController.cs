@@ -2,17 +2,30 @@ using Godot;
 using System;
 
 public partial class PlayerController : CharacterBody3D {
+	public static PlayerController Instance { get; private set; }
 	[Export] private float _speed;
 	[Export] private float _jumpVelocity;
 	[Export] private float _gravity;
 	[Export] private float _mouseSensitivity;
 	[Export] private Camera3D _camera;
+	private bool _pauseMenuShown = false;
 	public override void _Ready() {
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		Instance = this;
+		ChangeMouseCapturing();
 	}
 
 	public override void _Process(double delta)	{
 		Vector3 velocity = Velocity;
+
+		if (Input.IsActionJustPressed("Escape")) {
+			if (_pauseMenuShown) {
+				UI.Instance.HidePauseMenu(); 
+			} else {
+				UI.Instance.ShowPauseMenu();
+			}
+			_pauseMenuShown = !_pauseMenuShown;
+			ChangeMouseCapturing();
+		}
 
 		if (!IsOnFloor()) {
 			velocity.Y -= _gravity * (float)delta;
@@ -38,7 +51,8 @@ public partial class PlayerController : CharacterBody3D {
 	}
     
 	public override void _UnhandledInput(InputEvent @event) {
-        if (@event is InputEventMouseMotion mouseMotion) {
+        if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured) {
+			GD.Print("mouse moved, mode: ", Input.MouseMode);
 			RotateY(-mouseMotion.Relative.X * _mouseSensitivity);
 
 			Vector3 cameraRotation = _camera.Rotation;
@@ -46,4 +60,16 @@ public partial class PlayerController : CharacterBody3D {
 			_camera.Rotation = cameraRotation;
 		}
     }
+
+	public void ChangeMouseCapturing() {
+		if (Input.MouseMode == Input.MouseModeEnum.Captured) {
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		} else {
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
+	}
+
+	public void ChangePauseMenuShown(bool value) {
+		_pauseMenuShown = value;
+	}
 }

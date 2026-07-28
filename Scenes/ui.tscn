@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://vx0qr6h4xcr2"]
+
+[ext_resource type="Script" uid="uid://domg4th1402t0" path="res://Scripts/UI.cs" id="1_jxero"]
+
+[node name="UI" type="Control" unique_id=116208112]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_quitButton", "_pauseMenu")]
+script = ExtResource("1_jxero")
+_continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
+_quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
+_pauseMenu = NodePath("PauseMenu")
+
+[node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PauseMenu" unique_id=52282658]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/PauseMenu/Panel" unique_id=838741253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 300
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer2" unique_id=303953833]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Continue"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu/Panel" unique_id=628615798]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 600
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer" unique_id=338427534]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Quit Game"

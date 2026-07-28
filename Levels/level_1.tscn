@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cty23o1lxhsn"]
 
 [ext_resource type="Script" uid="uid://e312i4h4n3h4" path="res://Scripts/PlayerController.cs" id="1_n0qsc"]
+[ext_resource type="PackedScene" uid="uid://vx0qr6h4xcr2" path="res://Scenes/ui.tscn" id="2_dilhk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
 size = Vector3(20, 1, 20)
@@ -46,3 +47,5 @@ mesh = SubResource("CapsuleMesh_80fn0")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1429571666]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="UI" parent="." unique_id=116208112 instance=ExtResource("2_dilhk")]
