@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vx0qr6h4xcr2"]
 
 [ext_resource type="Script" uid="uid://domg4th1402t0" path="res://Scripts/UI.cs" id="1_jxero"]
+[ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
 
 [node name="UI" type="Control" unique_id=116208112]
 process_mode = 3
@@ -19,6 +20,7 @@ _quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
 
 [node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
+custom_minimum_size = Vector2(400, 300)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,3 +68,28 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Quit Game"
+
+[node name="TutorialHUD" type="MarginContainer" parent="CanvasLayer" unique_id=1951787528 node_paths=PackedStringArray("_tutorialText")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 1050
+theme_override_constants/margin_bottom = 830
+script = ExtResource("2_qdvrb")
+_tutorialText = NodePath("Panel/TutorialText")
+_tutorials = PackedStringArray("Move with W, A, S, and D", "Press Space to jump")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TutorialHUD" unique_id=513831388]
+layout_mode = 2
+
+[node name="TutorialText" type="RichTextLabel" parent="CanvasLayer/TutorialHUD/Panel" unique_id=1230176686]
+layout_mode = 0
+offset_right = 820.0
+offset_bottom = 200.0
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true

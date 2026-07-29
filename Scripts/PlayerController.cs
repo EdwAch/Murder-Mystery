@@ -14,10 +14,8 @@ public partial class PlayerController : CharacterBody3D {
 		ChangeMouseCapturing();
 	}
 
-	public override void _Process(double delta)	{
-		Vector3 velocity = Velocity;
-
-		if (Input.IsActionJustPressed("Escape")) {
+    public override void _Process(double delta) {
+        if (Input.IsActionJustPressed("Escape")) {
 			if (_pauseMenuShown) {
 				UI.Instance.HidePauseMenu(); 
 			} else {
@@ -26,6 +24,10 @@ public partial class PlayerController : CharacterBody3D {
 			_pauseMenuShown = !_pauseMenuShown;
 			ChangeMouseCapturing();
 		}
+    }
+
+	public override void _PhysicsProcess(double delta)	{
+		Vector3 velocity = Velocity;
 
 		if (!IsOnFloor()) {
 			velocity.Y -= _gravity * (float)delta;
