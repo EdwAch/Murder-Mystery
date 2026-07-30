@@ -20,6 +20,7 @@ _quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
 
 [node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
+visible = false
 custom_minimum_size = Vector2(400, 300)
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +70,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Quit Game"
 
-[node name="TutorialHUD" type="MarginContainer" parent="CanvasLayer" unique_id=1951787528 node_paths=PackedStringArray("_tutorialText")]
+[node name="TutorialHUD" type="MarginContainer" parent="CanvasLayer" unique_id=1951787528 node_paths=PackedStringArray("_tutorialText", "_loadingBar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,18 +79,34 @@ grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 1050
-theme_override_constants/margin_bottom = 830
+theme_override_constants/margin_bottom = 780
 script = ExtResource("2_qdvrb")
-_tutorialText = NodePath("Panel/TutorialText")
+_tutorialText = NodePath("MarginContainer2/ColorRect/TutorialText")
 _tutorials = PackedStringArray("Move with W, A, S, and D", "Press Space to jump")
+_loadingBar = NodePath("Control/LoadingBar")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/TutorialHUD" unique_id=513831388]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/TutorialHUD" unique_id=529577342]
 layout_mode = 2
 
-[node name="TutorialText" type="RichTextLabel" parent="CanvasLayer/TutorialHUD/Panel" unique_id=1230176686]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TutorialHUD/MarginContainer2" unique_id=1007457964]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TutorialText" type="RichTextLabel" parent="CanvasLayer/TutorialHUD/MarginContainer2/ColorRect" unique_id=1230176686]
 layout_mode = 0
 offset_right = 820.0
 offset_bottom = 200.0
 theme_override_font_sizes/normal_font_size = 64
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
+
+[node name="Control" type="Control" parent="CanvasLayer/TutorialHUD" unique_id=783498987]
+layout_mode = 2
+
+[node name="LoadingBar" type="ColorRect" parent="CanvasLayer/TutorialHUD/Control" unique_id=1119162188]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.90000004
+anchor_bottom = 0.90000004
+offset_top = -25.000015
+offset_bottom = 24.999985

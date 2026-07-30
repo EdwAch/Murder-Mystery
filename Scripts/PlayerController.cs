@@ -54,7 +54,6 @@ public partial class PlayerController : CharacterBody3D {
     
 	public override void _UnhandledInput(InputEvent @event) {
         if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured) {
-			GD.Print("mouse moved, mode: ", Input.MouseMode);
 			RotateY(-mouseMotion.Relative.X * _mouseSensitivity);
 
 			Vector3 cameraRotation = _camera.Rotation;
