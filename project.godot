@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Murder Mystery"
-run/main_scene="uid://cty23o1lxhsn"
+run/main_scene="uid://ch60krsbe7gvc"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LevelManager="*uid://bbpuyf2y6n4ro"
 
 [display]
 

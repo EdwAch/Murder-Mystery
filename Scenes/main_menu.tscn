@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bvvn3nwdyd7pj"]
+
+[ext_resource type="Script" uid="uid://28ugt8roilfo" path="res://Scripts/Level.cs" id="1_28flt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0h3l5"]
+
+[node name="MainMenu" type="Node3D" unique_id=496680469]
+script = ExtResource("1_28flt")
+_isLobby = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2023620655]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=613907909]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=174807746]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4344137)
+shape = SubResource("BoxShape3D_80fn0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=60308944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.525113)
+mesh = SubResource("BoxMesh_0h3l5")
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=218938956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9998636, 3.3359485)

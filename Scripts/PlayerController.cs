@@ -9,7 +9,9 @@ public partial class PlayerController : CharacterBody3D {
 	[Export] private float _mouseSensitivity;
 	[Export] private Camera3D _camera;
 	private bool _pauseMenuShown = false;
+	private bool _disableMovementInput = false;
 	public override void _Ready() {
+		LevelManager.Instance.RegisterPlayer(this);
 		Instance = this;
 		ChangeMouseCapturing();
 	}
@@ -29,27 +31,29 @@ public partial class PlayerController : CharacterBody3D {
 	public override void _PhysicsProcess(double delta)	{
 		Vector3 velocity = Velocity;
 
-		if (!IsOnFloor()) {
-			velocity.Y -= _gravity * (float)delta;
-		}
+		if (!_disableMovementInput) {
+			if (!IsOnFloor()) {
+				velocity.Y -= _gravity * (float)delta;
+			}
 
-		if (Input.IsActionJustPressed("Jump") && IsOnFloor()) {
-			velocity.Y += _jumpVelocity;
-		}
+			if (Input.IsActionJustPressed("Jump") && IsOnFloor()) {
+				velocity.Y += _jumpVelocity;
+			}
 		
-		Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+			Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
+			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		
-		if (direction != Vector3.Zero) {
-			velocity.X = direction.X * _speed;
-			velocity.Z = direction.Z * _speed;
-		} else {
-			velocity.X = Mathf.Lerp(velocity.X, 0, 10f * (float)delta);
-			velocity.Z = Mathf.Lerp(velocity.Z, 0, 10f * (float)delta);
-		}
+			if (direction != Vector3.Zero) {
+				velocity.X = direction.X * _speed;
+				velocity.Z = direction.Z * _speed;
+			} else {
+				velocity.X = Mathf.Lerp(velocity.X, 0, 10f * (float)delta);
+				velocity.Z = Mathf.Lerp(velocity.Z, 0, 10f * (float)delta);
+			}
 
-		Velocity = velocity;
-		MoveAndSlide();
+			Velocity = velocity;
+			MoveAndSlide();
+		}
 	}
     
 	public override void _UnhandledInput(InputEvent @event) {
@@ -72,5 +76,17 @@ public partial class PlayerController : CharacterBody3D {
 
 	public void ChangePauseMenuShown(bool value) {
 		_pauseMenuShown = value;
+	}
+
+	public void DetachCamera(bool value) {
+		if (value) {
+			_camera.Current = false;
+		} else {
+			_camera.Current = true;
+		}
+	}
+
+	public void DisableMovementInput(bool value) {
+		_disableMovementInput = value;
 	}
 }

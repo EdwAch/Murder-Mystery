@@ -11,6 +11,8 @@ public partial class TutorialUI : MarginContainer {
 	private int _tutorialNumber = 0;
 	private bool _hasMoved = false;
 	private bool _hasJumped = false;
+	private bool _inLobby;
+	private bool _inLevelOne = false;
 	private const float FadeTime = 0.3f;
 	public override void _Ready() {
 		CallDeferred(MethodName.SubscribeToUI);
@@ -19,23 +21,26 @@ public partial class TutorialUI : MarginContainer {
 	}
 
     public override void _PhysicsProcess(double delta) {
-		Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
+		if (!_inLobby) {
+			Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
 
-        if (!_hasMoved && inputDir != Vector2.Zero) {
-			_hasMoved = true;
-			UpdateTutorialText(_tutorials[_tutorialNumber], 2);
-			_tutorialNumber++;
-		}
+        	if (!_hasMoved && inputDir != Vector2.Zero) {
+				_hasMoved = true;
+				UpdateTutorialText(_tutorials[_tutorialNumber], 2);
+				_tutorialNumber++;
+			}
 
-		if (_hasMoved && !_hasJumped && Input.IsActionJustPressed("Jump")) {
-			_hasJumped = true;
-			UpdateTutorialText(_tutorials[0], 2);
-			_tutorialNumber = 0;
+			if (_hasMoved && !_hasJumped && Input.IsActionJustPressed("Jump")) {
+				_hasJumped = true;
+				UpdateTutorialText(_tutorials[0], 2);
+				_tutorialNumber = 0;
+			}
 		}
     }
 
 	private void SubscribeToUI() {
 		UI.Instance.GamePaused += OnGamePaused;
+		//Level.Instance.InLobby += InLobby;
 	}
 
 	private void OnGamePaused(bool isPaused) {
@@ -49,6 +54,15 @@ public partial class TutorialUI : MarginContainer {
 			ShowTutorialHUD();
 		}
 	}
+
+	/*private void InLobby(bool inLobby) {
+		_inLobby = inLobby;
+		if (_inLobby) {
+			this.Visible = false;
+		} else if (_inLevelOne) {
+			this.Visible = true;
+		}
+	}*/
 
 	private void UpdateTutorialText(string str, float waitTime = 0f) {
 		_tween?.Kill();

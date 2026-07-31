@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ch60krsbe7gvc"]
+
+[ext_resource type="Script" uid="uid://e312i4h4n3h4" path="res://Scripts/PlayerController.cs" id="1_oq4ov"]
+[ext_resource type="Script" uid="uid://bxwq3564to2li" path="res://Scripts/GameManager.cs" id="1_x2gyv"]
+[ext_resource type="PackedScene" uid="uid://vx0qr6h4xcr2" path="res://Scenes/ui.tscn" id="2_dswpd"]
+[ext_resource type="PackedScene" uid="uid://bvvn3nwdyd7pj" path="res://Scenes/main_menu.tscn" id="2_q4qju"]
+[ext_resource type="Script" uid="uid://bgg8ffy3p6bs2" path="res://Scripts/LevelContainer.cs" id="2_x2gyv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x2gyv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dilhk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4qju"]
+material = SubResource("StandardMaterial3D_dilhk")
+
+[node name="World" type="Node3D" unique_id=823489630]
+script = ExtResource("1_x2gyv")
+_levelList = Array[PackedScene]([ExtResource("2_q4qju")])
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=792719331 node_paths=PackedStringArray("_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3977733, 0)
+script = ExtResource("1_oq4ov")
+_speed = 10.0
+_jumpVelocity = 5.0
+_gravity = 9.8
+_mouseSensitivity = 0.003
+_camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=131370706]
+shape = SubResource("CapsuleShape3D_x2gyv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=197202366]
+mesh = SubResource("CapsuleMesh_q4qju")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1365689025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="LevelContainer" type="Node3D" parent="." unique_id=486957929]
+script = ExtResource("2_x2gyv")
+
+[node name="UI" parent="." unique_id=116208112 instance=ExtResource("2_dswpd")]
