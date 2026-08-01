@@ -32,7 +32,7 @@ public partial class UI : CanvasLayer {
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		PlayerController.Instance.ChangeMouseCapturing();
 	}
-	private void QuitButtonPressed() {
+	public void QuitButtonPressed() {
 		GetTree().Quit();
 	}
 }

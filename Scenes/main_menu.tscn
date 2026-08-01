@@ -24,3 +24,6 @@ mesh = SubResource("BoxMesh_0h3l5")
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=218938956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9998636, 3.3359485)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=271629169]
+transform = Transform3D(0.31757814, 0.65159357, -0.6888904, -0.2727926, 0.7585683, 0.59174186, 0.9081456, -6.1245245e-08, 0.41865462, 0, 16, 0)

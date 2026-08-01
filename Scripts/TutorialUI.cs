@@ -11,7 +11,7 @@ public partial class TutorialUI : MarginContainer {
 	private int _tutorialNumber = 0;
 	private bool _hasMoved = false;
 	private bool _hasJumped = false;
-	private bool _inLobby;
+	private bool _inMainMenu;
 	private bool _inLevelOne = false;
 	private const float FadeTime = 0.3f;
 	public override void _Ready() {
@@ -21,7 +21,7 @@ public partial class TutorialUI : MarginContainer {
 	}
 
     public override void _PhysicsProcess(double delta) {
-		if (!_inLobby) {
+		if (!_inMainMenu) {
 			Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
 
         	if (!_hasMoved && inputDir != Vector2.Zero) {

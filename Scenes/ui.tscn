@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vx0qr6h4xcr2"]
 
 [ext_resource type="Script" uid="uid://domg4th1402t0" path="res://Scripts/UI.cs" id="1_jxero"]
+[ext_resource type="Script" uid="uid://dhrraeon8nd6v" path="res://Scripts/MainMenuUI.cs" id="2_nf4gj"]
 [ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
 
 [node name="UI" type="Control" unique_id=116208112]
@@ -18,6 +19,117 @@ script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
+
+[node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_nf4gj")
+_newGameButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/NewGameContainer/NewGameButton")
+_continueGameButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/ContinueContainer/ContinueButton")
+_settingsButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/SettingsButtonContainer/SettingsButton")
+_quitButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/QuitGameContainer/QuitGameButton")
+
+[node name="MainMenu" type="Control" parent="CanvasLayer/MainMenuUI" unique_id=727797803]
+layout_mode = 2
+
+[node name="TitleContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu" unique_id=404570122]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 800
+
+[node name="TEMP" type="Panel" parent="CanvasLayer/MainMenuUI/MainMenu/TitleContainer" unique_id=1123598765]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu" unique_id=209529633]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 500
+theme_override_constants/margin_right = 1300
+theme_override_constants/margin_bottom = 200
+
+[node name="ButtonsBackground" type="Panel" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer" unique_id=116557195]
+layout_mode = 2
+
+[node name="NewGameContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=1757270326]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 300
+
+[node name="NewGameButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/NewGameContainer" unique_id=1012529815]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="ContinueContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=1770962791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 220
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/ContinueContainer" unique_id=1902803859]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="SettingsButtonContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=206555126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 220
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 100
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/SettingsButtonContainer" unique_id=1959536558]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="QuitGameContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=219929261]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="QuitGameButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/QuitGameContainer" unique_id=169668036]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "TEST"
 
 [node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
 visible = false
@@ -71,6 +183,7 @@ theme_override_font_sizes/font_size = 64
 text = "Quit Game"
 
 [node name="TutorialHUD" type="MarginContainer" parent="CanvasLayer" unique_id=1951787528 node_paths=PackedStringArray("_tutorialText", "_loadingBar")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

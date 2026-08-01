@@ -9,15 +9,16 @@ public partial class PlayerController : CharacterBody3D {
 	[Export] private float _mouseSensitivity;
 	[Export] private Camera3D _camera;
 	private bool _pauseMenuShown = false;
+	private bool _inMainMenu = true;
 	private bool _disableMovementInput = false;
 	public override void _Ready() {
 		LevelManager.Instance.RegisterPlayer(this);
 		Instance = this;
-		ChangeMouseCapturing();
+		//ChangeMouseCapturing();
 	}
 
     public override void _Process(double delta) {
-        if (Input.IsActionJustPressed("Escape")) {
+        if (!_inMainMenu && Input.IsActionJustPressed("Escape")) {
 			if (_pauseMenuShown) {
 				UI.Instance.HidePauseMenu(); 
 			} else {
