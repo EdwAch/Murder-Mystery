@@ -75,7 +75,7 @@ theme_override_constants/margin_bottom = 300
 [node name="NewGameButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/NewGameContainer" unique_id=1012529815]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "TEST"
+text = "New Game"
 
 [node name="ContinueContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=1770962791]
 layout_mode = 1
@@ -93,7 +93,7 @@ theme_override_constants/margin_bottom = 220
 [node name="ContinueButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/ContinueContainer" unique_id=1902803859]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "TEST"
+text = "Continue"
 
 [node name="SettingsButtonContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=206555126]
 layout_mode = 1
@@ -111,7 +111,7 @@ theme_override_constants/margin_bottom = 100
 [node name="SettingsButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/SettingsButtonContainer" unique_id=1959536558]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "TEST"
+text = "Settings"
 
 [node name="QuitGameContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=219929261]
 layout_mode = 1
@@ -129,10 +129,9 @@ theme_override_constants/margin_bottom = 20
 [node name="QuitGameButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/QuitGameContainer" unique_id=169668036]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "TEST"
+text = "Quit Game"
 
 [node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
-visible = false
 custom_minimum_size = Vector2(400, 300)
 anchors_preset = 15
 anchor_right = 1.0

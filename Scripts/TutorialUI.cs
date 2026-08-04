@@ -15,7 +15,7 @@ public partial class TutorialUI : MarginContainer {
 	private bool _inLevelOne = false;
 	private const float FadeTime = 0.3f;
 	public override void _Ready() {
-		CallDeferred(MethodName.SubscribeToUI);
+		CallDeferred(MethodName.SubscribeToSignals);
 		UpdateTutorialText(_tutorials[_tutorialNumber]);
 		_tutorialNumber++;
 	}
@@ -38,9 +38,10 @@ public partial class TutorialUI : MarginContainer {
 		}
     }
 
-	private void SubscribeToUI() {
+	private void SubscribeToSignals() {
 		UI.Instance.GamePaused += OnGamePaused;
-		//Level.Instance.InLobby += InLobby;
+		GameManager.Instance.InLobby += PlayerInLobby;
+		PlayerInLobby(GameManager.Instance.IsInLobby);
 	}
 
 	private void OnGamePaused(bool isPaused) {
@@ -55,14 +56,13 @@ public partial class TutorialUI : MarginContainer {
 		}
 	}
 
-	/*private void InLobby(bool inLobby) {
-		_inLobby = inLobby;
-		if (_inLobby) {
+	private void PlayerInLobby(bool inLobby) {
+		if (inLobby) {
 			this.Visible = false;
 		} else if (_inLevelOne) {
 			this.Visible = true;
 		}
-	}*/
+	}
 
 	private void UpdateTutorialText(string str, float waitTime = 0f) {
 		_tween?.Kill();
