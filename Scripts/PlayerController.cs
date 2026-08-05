@@ -90,4 +90,8 @@ public partial class PlayerController : CharacterBody3D {
 	public void DisableMovementInput(bool value) {
 		_disableMovementInput = value;
 	}
+
+	public void ChangeInMainMenuBool(bool value) {
+		_inMainMenu = value;
+	}
 }

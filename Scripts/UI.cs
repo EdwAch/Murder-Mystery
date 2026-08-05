@@ -8,11 +8,13 @@ public partial class UI : CanvasLayer {
 	[Export] private Button _continueButton;
 	[Export] private Button _quitButton;
 	[Export] private MarginContainer _pauseMenu;
+	[Export] private MarginContainer _loadingScreen;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
 		_quitButton.Pressed += QuitButtonPressed;
 		HidePauseMenu();
+		HideLoadingScreen();
 	}
 
 	public void ShowPauseMenu() {
@@ -24,6 +26,14 @@ public partial class UI : CanvasLayer {
 	public void HidePauseMenu() {
 		_pauseMenu.Hide();
 		EmitSignal(SignalName.GamePaused, false);
+	}
+
+	public void ShowLoadingScreen() {
+		_loadingScreen.Show();
+	}
+
+	public void HideLoadingScreen() {
+		_loadingScreen.Hide();
 	}
 	
 	private void ContinueButtonPressed() {

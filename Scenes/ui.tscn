@@ -14,11 +14,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_quitButton", "_pauseMenu")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_quitButton", "_pauseMenu", "_loadingScreen")]
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
+_loadingScreen = NodePath("LoadingScreen")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
 anchors_preset = 15
@@ -222,3 +223,28 @@ anchor_top = 0.90000004
 anchor_bottom = 0.90000004
 offset_top = -25.000015
 offset_bottom = 24.999985
+
+[node name="LoadingScreen" type="MarginContainer" parent="CanvasLayer" unique_id=858070834]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingBackground" type="ColorRect" parent="CanvasLayer/LoadingScreen" unique_id=1600804731]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LoadingScreen" unique_id=308907621]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LoadingText" type="RichTextLabel" parent="CanvasLayer/LoadingScreen/MarginContainer" unique_id=1311168090]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]Loading.."
+horizontal_alignment = 1
+vertical_alignment = 1

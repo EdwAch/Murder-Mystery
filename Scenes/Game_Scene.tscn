@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://e312i4h4n3h4" path="res://Scripts/PlayerController.cs" id="1_oq4ov"]
 [ext_resource type="Script" uid="uid://bxwq3564to2li" path="res://Scripts/GameManager.cs" id="1_x2gyv"]
 [ext_resource type="PackedScene" uid="uid://vx0qr6h4xcr2" path="res://Scenes/ui.tscn" id="2_dswpd"]
-[ext_resource type="PackedScene" uid="uid://bvvn3nwdyd7pj" path="res://Scenes/main_menu.tscn" id="2_q4qju"]
 [ext_resource type="Script" uid="uid://bgg8ffy3p6bs2" path="res://Scripts/LevelContainer.cs" id="2_x2gyv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x2gyv"]
@@ -15,7 +14,7 @@ material = SubResource("StandardMaterial3D_dilhk")
 
 [node name="World" type="Node3D" unique_id=823489630]
 script = ExtResource("1_x2gyv")
-_levelList = Array[PackedScene]([ExtResource("2_q4qju")])
+_levelListUids = PackedStringArray("uid://bvvn3nwdyd7pj", "uid://cty23o1lxhsn")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=792719331 node_paths=PackedStringArray("_camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3977733, 0)
