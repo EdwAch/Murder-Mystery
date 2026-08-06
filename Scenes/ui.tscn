@@ -14,14 +14,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_quitButton", "_pauseMenu", "_loadingScreen")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen")]
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
-_quitButton = NodePath("PauseMenu/Panel/MarginContainer/QuitButton")
+_mainMenuButton = NodePath("PauseMenu/Panel/MarginContainer/MainMenuButton")
+_quitButton = NodePath("PauseMenu/Panel/MarginContainer3/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
 _loadingScreen = NodePath("LoadingScreen")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -155,9 +157,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 400
+theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 300
+theme_override_constants/margin_bottom = 500
 
 [node name="ContinueButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer2" unique_id=303953833]
 layout_mode = 2
@@ -173,14 +175,32 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 300
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer" unique_id=338427534]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Quit to Main Menu"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/PauseMenu/Panel" unique_id=584410235]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 600
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer" unique_id=338427534]
+[node name="QuitButton" type="Button" parent="CanvasLayer/PauseMenu/Panel/MarginContainer3" unique_id=908531119]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Quit Game"
+text = "Quit To Desktop"
 
 [node name="TutorialHUD" type="MarginContainer" parent="CanvasLayer" unique_id=1951787528 node_paths=PackedStringArray("_tutorialText", "_loadingBar")]
 visible = false
@@ -225,6 +245,7 @@ offset_top = -25.000015
 offset_bottom = 24.999985
 
 [node name="LoadingScreen" type="MarginContainer" parent="CanvasLayer" unique_id=858070834]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

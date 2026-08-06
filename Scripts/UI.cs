@@ -6,12 +6,14 @@ public partial class UI : CanvasLayer {
 	[Signal] 
 	public delegate void GamePausedEventHandler(bool isPaused);
 	[Export] private Button _continueButton;
+	[Export] private Button _mainMenuButton;
 	[Export] private Button _quitButton;
 	[Export] private MarginContainer _pauseMenu;
 	[Export] private MarginContainer _loadingScreen;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
+		_mainMenuButton.Pressed += MainMenuButtonPressed;
 		_quitButton.Pressed += QuitButtonPressed;
 		HidePauseMenu();
 		HideLoadingScreen();
@@ -42,7 +44,14 @@ public partial class UI : CanvasLayer {
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		PlayerController.Instance.ChangeMouseCapturing();
 	}
-	public void QuitButtonPressed() {
+	private void MainMenuButtonPressed() {
+		HidePauseMenu();
+		GetTree().Paused = false;
+		PlayerController.Instance.ChangePauseMenuShown(false);
+		GameManager.Instance.GoToLevel(0);
+	}
+
+	private void QuitButtonPressed() {
 		GetTree().Quit();
 	}
 }

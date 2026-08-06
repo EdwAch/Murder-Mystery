@@ -16,7 +16,7 @@ material = SubResource("StandardMaterial3D_dilhk")
 script = ExtResource("1_x2gyv")
 _levelListUids = PackedStringArray("uid://bvvn3nwdyd7pj", "uid://cty23o1lxhsn")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=792719331 node_paths=PackedStringArray("_camera")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=792719331 node_paths=PackedStringArray("_camera", "_interactionRay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3977733, 0)
 script = ExtResource("1_oq4ov")
 _speed = 10.0
@@ -24,6 +24,7 @@ _jumpVelocity = 5.0
 _gravity = 9.8
 _mouseSensitivity = 0.003
 _camera = NodePath("Camera3D")
+_interactionRay = NodePath("Camera3D/InteractionRay")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=131370706]
 shape = SubResource("CapsuleShape3D_x2gyv")
@@ -33,6 +34,10 @@ mesh = SubResource("CapsuleMesh_q4qju")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1365689025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="InteractionRay" type="RayCast3D" parent="CharacterBody3D/Camera3D" unique_id=1461600914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46211922)
+target_position = Vector3(0, 0, -2.8)
 
 [node name="LevelContainer" type="Node3D" parent="." unique_id=486957929]
 script = ExtResource("2_x2gyv")

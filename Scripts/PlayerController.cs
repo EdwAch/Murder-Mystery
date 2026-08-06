@@ -8,6 +8,7 @@ public partial class PlayerController : CharacterBody3D {
 	[Export] private float _gravity;
 	[Export] private float _mouseSensitivity;
 	[Export] private Camera3D _camera;
+	[Export] private RayCast3D _interactionRay;
 	private bool _pauseMenuShown = false;
 	private bool _inMainMenu = true;
 	private bool _disableMovementInput = false;
@@ -53,7 +54,17 @@ public partial class PlayerController : CharacterBody3D {
 			}
 
 			Velocity = velocity;
+			HandleInteraction();
 			MoveAndSlide();
+		}
+	}
+
+	private void HandleInteraction() {
+		if (_interactionRay.IsColliding()) {
+			var collider = _interactionRay.GetCollider();
+			if (collider is InteractableObject interactable && Input.IsActionJustPressed("Interact")) {
+				interactable.Interact(this);
+			}
 		}
 	}
     
