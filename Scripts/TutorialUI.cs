@@ -12,7 +12,6 @@ public partial class TutorialUI : MarginContainer {
 	private bool _hasMoved = false;
 	private bool _hasJumped = false;
 	private bool _inMainMenu;
-	private bool _inLevelOne = false;
 	private const float FadeTime = 0.3f;
 	public override void _Ready() {
 		CallDeferred(MethodName.SubscribeToSignals);
@@ -59,7 +58,7 @@ public partial class TutorialUI : MarginContainer {
 	private void PlayerInLobby(bool inLobby) {
 		if (inLobby) {
 			this.Visible = false;
-		} else if (_inLevelOne) {
+		} else {
 			this.Visible = true;
 		}
 	}

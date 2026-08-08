@@ -12,6 +12,7 @@ public partial class PlayerController : CharacterBody3D {
 	private bool _pauseMenuShown = false;
 	private bool _inMainMenu = true;
 	private bool _disableMovementInput = false;
+	private InteractableObject _previousInteractable;
 	public override void _Ready() {
 		LevelManager.Instance.RegisterPlayer(this);
 		Instance = this;
@@ -62,9 +63,17 @@ public partial class PlayerController : CharacterBody3D {
 	private void HandleInteraction() {
 		if (_interactionRay.IsColliding()) {
 			var collider = _interactionRay.GetCollider();
-			if (collider is InteractableObject interactable && Input.IsActionJustPressed("Interact")) {
-				interactable.Interact(this);
+			if (collider is InteractableObject interactable) {
+				_previousInteractable = interactable;
+				interactable.ShowLabel(true);
+				if (Input.IsActionJustPressed("Interact")) {
+					interactable.Interact(this);
+					interactable.ShowLabel(false);
+				}
 			}
+		} else if (_previousInteractable != null){
+			_previousInteractable.ShowLabel(false);
+			_previousInteractable = null;
 		}
 	}
     

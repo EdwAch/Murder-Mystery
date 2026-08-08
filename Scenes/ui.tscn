@@ -14,13 +14,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen", "_interactableMessage")]
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _mainMenuButton = NodePath("PauseMenu/Panel/MarginContainer/MainMenuButton")
 _quitButton = NodePath("PauseMenu/Panel/MarginContainer3/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
 _loadingScreen = NodePath("LoadingScreen")
+_interactableMessage = NodePath("InteractableMessage")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
 visible = false
@@ -267,5 +268,27 @@ layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 text = "[b]Loading.."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractableMessage" type="MarginContainer" parent="CanvasLayer" unique_id=828834852]
+visible = false
+custom_minimum_size = Vector2(200, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_top = 600
+theme_override_constants/margin_right = 700
+theme_override_constants/margin_bottom = 380
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/InteractableMessage" unique_id=465686341]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]E"
 horizontal_alignment = 1
 vertical_alignment = 1

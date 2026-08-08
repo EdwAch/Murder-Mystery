@@ -10,6 +10,7 @@ public partial class UI : CanvasLayer {
 	[Export] private Button _quitButton;
 	[Export] private MarginContainer _pauseMenu;
 	[Export] private MarginContainer _loadingScreen;
+	[Export] private MarginContainer _interactableMessage;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
@@ -37,6 +38,14 @@ public partial class UI : CanvasLayer {
 	public void HideLoadingScreen() {
 		_loadingScreen.Hide();
 	}
+
+	public void ShowInteractableMessage() {
+		_interactableMessage.Visible = true;
+	}
+
+	public void HideInteractableMessage() {
+		_interactableMessage.Visible = false;
+	}
 	
 	private void ContinueButtonPressed() {
 		HidePauseMenu();
@@ -47,6 +56,7 @@ public partial class UI : CanvasLayer {
 	private void MainMenuButtonPressed() {
 		HidePauseMenu();
 		GetTree().Paused = false;
+		HideInteractableMessage();
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		GameManager.Instance.GoToLevel(0);
 	}

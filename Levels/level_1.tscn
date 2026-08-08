@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://cty23o1lxhsn"]
 
 [ext_resource type="Script" uid="uid://28ugt8roilfo" path="res://Scripts/Level.cs" id="1_n0qsc"]
+[ext_resource type="Script" uid="uid://ccjrdl2vfhqi4" path="res://Scripts/InteractableObject.cs" id="2_dilhk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_80fn0"]
 size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_plxfv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0h3l5"]
 
 [node name="Node3D" type="Node3D" unique_id=1097642956]
 script = ExtResource("1_n0qsc")
@@ -25,3 +30,13 @@ shadow_enabled = true
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=991753723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9998636, 4.2858257)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1330318694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1052988, 0)
+script = ExtResource("2_dilhk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=694475308]
+shape = SubResource("BoxShape3D_plxfv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=44936348]
+mesh = SubResource("BoxMesh_0h3l5")
