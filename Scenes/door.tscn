@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cr8okbx7lguwq"]
+
+[ext_resource type="Script" uid="uid://cr0oaeya7mc86" path="res://Scripts/Door.cs" id="1_w6aom"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0h3l5"]
+size = Vector3(1, 2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
+size = Vector3(1, 2, 0.2)
+
+[node name="Door" type="Node3D" unique_id=1370302463 node_paths=PackedStringArray("_door")]
+script = ExtResource("1_w6aom")
+_door = NodePath("DoorPart")
+
+[node name="DoorPart" type="AnimatableBody3D" parent="." unique_id=1320649523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorPart" unique_id=1874816582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+mesh = SubResource("BoxMesh_0h3l5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorPart" unique_id=1872327010]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+shape = SubResource("BoxShape3D_80fn0")
