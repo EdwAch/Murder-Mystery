@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://k2iovxuwkpiw"]
+
+[ext_resource type="Script" uid="uid://ccjrdl2vfhqi4" path="res://Scripts/InteractableObject.cs" id="1_wnwrh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6dsm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f335v"]
+
+[node name="BreakableObject" type="StaticBody3D" unique_id=1039087190 node_paths=PackedStringArray("_objectToBeInteracted")]
+script = ExtResource("1_wnwrh")
+Type = 1
+_objectToBeInteracted = NodePath(".")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=959518773]
+shape = SubResource("BoxShape3D_f6dsm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1528536122]
+mesh = SubResource("BoxMesh_f335v")

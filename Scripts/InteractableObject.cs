@@ -3,7 +3,7 @@ using System;
 
 public partial class InteractableObject : StaticBody3D {
 
-	private enum InteractType { Door, BreakableObject}
+	private enum InteractType { Door, BreakableObject, NPC}
 	[Export] private InteractType Type;
 	[Export] private Node3D _objectToBeInteracted;
     public override void _Ready() {
@@ -16,6 +16,14 @@ public partial class InteractableObject : StaticBody3D {
 					door.ChangeDoorState();
 				}
 				break;
+			case InteractType.BreakableObject:
+				_objectToBeInteracted.QueueFree();
+				break;
+			case InteractType.NPC:
+				if (_objectToBeInteracted is NPC npc) {
+					npc.StartInteraction();
+				}
+				break;	
 		}
 	}
 

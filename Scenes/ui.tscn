@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://domg4th1402t0" path="res://Scripts/UI.cs" id="1_jxero"]
 [ext_resource type="Script" uid="uid://dhrraeon8nd6v" path="res://Scripts/MainMenuUI.cs" id="2_nf4gj"]
 [ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
+[ext_resource type="Script" uid="uid://birfj2xtiuanj" path="res://Scripts/NPCInteraction.cs" id="4_2246s"]
 
 [node name="UI" type="Control" unique_id=116208112]
 process_mode = 3
@@ -290,5 +291,41 @@ layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 text = "[b]E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NPCInteraction" type="MarginContainer" parent="CanvasLayer" unique_id=1378434075]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_2246s")
+
+[node name="Text" type="MarginContainer" parent="CanvasLayer/NPCInteraction" unique_id=1548718438]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 750
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="Panel" type="Panel" parent="CanvasLayer/NPCInteraction/Text" unique_id=1571344375]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/NPCInteraction/Text/Panel" unique_id=2000525005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+theme_override_font_sizes/bold_italics_font_size = 64
+theme_override_font_sizes/italics_font_size = 64
+theme_override_font_sizes/mono_font_size = 64
+text = "TEMP"
 horizontal_alignment = 1
 vertical_alignment = 1
