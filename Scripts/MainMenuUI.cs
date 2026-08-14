@@ -27,7 +27,7 @@ public partial class MainMenuUI : MarginContainer{
 		} else {
 			this.Visible = false;
 			PlayerController.Instance.ChangeInMainMenuBool(false);
-			PlayerController.Instance.ChangeMouseCapturing();
+			PlayerController.Instance.ChangeMouseCapturing(true);
 		}
 	}
 

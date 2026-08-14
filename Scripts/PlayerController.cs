@@ -27,7 +27,7 @@ public partial class PlayerController : CharacterBody3D {
 				UI.Instance.ShowPauseMenu();
 			}
 			_pauseMenuShown = !_pauseMenuShown;
-			ChangeMouseCapturing();
+			ChangeMouseCapturing(false);
 		}
     }
 
@@ -87,11 +87,11 @@ public partial class PlayerController : CharacterBody3D {
 		}
     }
 
-	public void ChangeMouseCapturing() {
-		if (Input.MouseMode == Input.MouseModeEnum.Captured) {
-			Input.MouseMode = Input.MouseModeEnum.Visible;
-		} else {
+	public void ChangeMouseCapturing(bool value) {
+		if (value) {
 			Input.MouseMode = Input.MouseModeEnum.Captured;
+		} else {
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 	}
 

@@ -5,5 +5,7 @@ public partial class NPC : Node3D {
 	
 	public void StartInteraction() {
 		NPCInteraction.Instance.ShowNPCInteraction();
+		PlayerController.Instance.ChangeMouseCapturing(false);
+		PlayerController.Instance.DisableMovementInput(true);
 	}
 }

@@ -11,6 +11,8 @@ public partial class UI : CanvasLayer {
 	[Export] private MarginContainer _pauseMenu;
 	[Export] private MarginContainer _loadingScreen;
 	[Export] private MarginContainer _interactableMessage;
+	[Export] private MarginContainer _NPCInteraction;
+	private bool _wasInteracting = false;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
@@ -22,6 +24,11 @@ public partial class UI : CanvasLayer {
 
 	public void ShowPauseMenu() {
 		_pauseMenu.Show();
+		if (_interactableMessage.Visible) {
+			_wasInteracting = true;
+		} else {
+			_wasInteracting = false;
+		}
 		EmitSignal(SignalName.GamePaused, true);
 		GetTree().Paused = true;
 	}
@@ -51,12 +58,18 @@ public partial class UI : CanvasLayer {
 		HidePauseMenu();
 		GetTree().Paused = false;
 		PlayerController.Instance.ChangePauseMenuShown(false);
-		PlayerController.Instance.ChangeMouseCapturing();
+		PlayerController.Instance.ChangeMouseCapturing(true);
+		if (_wasInteracting) {
+			ShowInteractableMessage();
+		} else {
+			HideInteractableMessage();
+		}
 	}
 	private void MainMenuButtonPressed() {
 		HidePauseMenu();
 		GetTree().Paused = false;
 		HideInteractableMessage();
+		_NPCInteraction.Hide();
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		GameManager.Instance.GoToLevel(0);
 	}

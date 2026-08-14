@@ -30,7 +30,7 @@ public partial class NPCInteraction : MarginContainer {
 		if (isPaused && _inInteraction) {
 			HideNPCInteraction();
 			_wasInteracting = true;
-		} else if (!isPaused && _wasInteracting){
+		} else if (!isPaused && _wasInteracting) {
 			ShowNPCInteraction();
 			_wasInteracting = false;
 		}

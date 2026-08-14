@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen", "_interactableMessage")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen", "_interactableMessage", "_NPCInteraction")]
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _mainMenuButton = NodePath("PauseMenu/Panel/MarginContainer/MainMenuButton")
@@ -23,6 +23,7 @@ _quitButton = NodePath("PauseMenu/Panel/MarginContainer3/QuitButton")
 _pauseMenu = NodePath("PauseMenu")
 _loadingScreen = NodePath("LoadingScreen")
 _interactableMessage = NodePath("InteractableMessage")
+_NPCInteraction = NodePath("NPCInteraction")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
 visible = false
@@ -137,6 +138,7 @@ theme_override_font_sizes/font_size = 32
 text = "Quit Game"
 
 [node name="PauseMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1553582725]
+visible = false
 custom_minimum_size = Vector2(400, 300)
 anchors_preset = 15
 anchor_right = 1.0
@@ -295,7 +297,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NPCInteraction" type="MarginContainer" parent="CanvasLayer" unique_id=1378434075]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
