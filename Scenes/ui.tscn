@@ -26,7 +26,6 @@ _interactableMessage = NodePath("InteractableMessage")
 _NPCInteraction = NodePath("NPCInteraction")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -297,6 +296,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NPCInteraction" type="MarginContainer" parent="CanvasLayer" unique_id=1378434075]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -14,16 +14,19 @@ public partial class NPCInteraction : MarginContainer {
 
 	private void SubscribeToSignals() {
 		UI.Instance.GamePaused += OnGamePaused;
+		GameManager.Instance.InLobby += IsInLobby;
 	}
 
 	public void ShowNPCInteraction() {
 		this.Show();
 		_inInteraction = true;
+		UI.Instance.ChangeInNPCInteractionBool(true);
 	}
 
 	public void HideNPCInteraction() {
 		this.Hide();
 		_inInteraction = false;
+		//UI.Instance.ChangeInNPCInteractionBool(false);
 	}
 
 	private void OnGamePaused(bool isPaused) {
@@ -33,6 +36,14 @@ public partial class NPCInteraction : MarginContainer {
 		} else if (!isPaused && _wasInteracting) {
 			ShowNPCInteraction();
 			_wasInteracting = false;
+		}
+	}
+
+	private void IsInLobby(bool inLobby) {
+		if (inLobby) {
+			HideNPCInteraction();
+			_wasInteracting = false;
+			UI.Instance.ChangeInNPCInteractionBool(false);
 		}
 	}
 }

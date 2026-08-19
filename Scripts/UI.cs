@@ -12,7 +12,8 @@ public partial class UI : CanvasLayer {
 	[Export] private MarginContainer _loadingScreen;
 	[Export] private MarginContainer _interactableMessage;
 	[Export] private MarginContainer _NPCInteraction;
-	private bool _wasInteracting = false;
+	private bool _wasAwaitingInteraction = false;
+	private bool _inNPCInteraction = false;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
@@ -22,12 +23,16 @@ public partial class UI : CanvasLayer {
 		HideLoadingScreen();
 	}
 
+	public void ChangeInNPCInteractionBool(bool value) {
+		_inNPCInteraction = value;
+	}
+
 	public void ShowPauseMenu() {
 		_pauseMenu.Show();
 		if (_interactableMessage.Visible) {
-			_wasInteracting = true;
+			_wasAwaitingInteraction = true;
 		} else {
-			_wasInteracting = false;
+			_wasAwaitingInteraction = false;
 		}
 		EmitSignal(SignalName.GamePaused, true);
 		GetTree().Paused = true;
@@ -59,13 +64,21 @@ public partial class UI : CanvasLayer {
 		GetTree().Paused = false;
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		PlayerController.Instance.ChangeMouseCapturing(true);
-		if (_wasInteracting) {
+		GD.Print(_inNPCInteraction);
+		if (_wasAwaitingInteraction) {
 			ShowInteractableMessage();
-		} else {
+			GD.Print("IN IF");
+		} else if(!_wasAwaitingInteraction && !_inNPCInteraction) {
 			HideInteractableMessage();
+			GD.Print("IN ELSEIF1");
+		} else if(!_wasAwaitingInteraction && _inNPCInteraction) {
+			HideInteractableMessage();
+			GD.Print("IN ELSEIF2");
+			PlayerController.Instance.ChangeMouseCapturing(false);
 		}
 	}
 	private void MainMenuButtonPressed() {
+		_wasAwaitingInteraction = false;
 		HidePauseMenu();
 		GetTree().Paused = false;
 		HideInteractableMessage();

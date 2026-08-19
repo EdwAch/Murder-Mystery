@@ -16,7 +16,6 @@ public partial class PlayerController : CharacterBody3D {
 	public override void _Ready() {
 		LevelManager.Instance.RegisterPlayer(this);
 		Instance = this;
-		//ChangeMouseCapturing();
 	}
 
     public override void _Process(double delta) {

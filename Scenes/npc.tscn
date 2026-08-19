@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dlu38fk7unlmp"]
+
+[ext_resource type="Script" uid="uid://bs21eajd6j5yx" path="res://Scripts/NPC.cs" id="1_xxsvc"]
+[ext_resource type="Script" uid="uid://ccjrdl2vfhqi4" path="res://Scripts/InteractableObject.cs" id="2_g6unj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbet4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_06dlc"]
+
+[node name="NPC" type="Node3D" unique_id=1005443460]
+script = ExtResource("1_xxsvc")
+
+[node name="NPCBody" type="StaticBody3D" parent="." unique_id=1424462554 node_paths=PackedStringArray("_objectToBeInteracted")]
+script = ExtResource("2_g6unj")
+Type = 2
+_objectToBeInteracted = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCBody" unique_id=1567892061]
+shape = SubResource("CapsuleShape3D_hbet4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPCBody" unique_id=1414783028]
+mesh = SubResource("CapsuleMesh_06dlc")

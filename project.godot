@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 LevelManager="*uid://bbpuyf2y6n4ro"
+KeyItemChecklist="*uid://dw0jwchkphhgv"
 
 [display]
 

@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cty23o1lxhsn"]
 
 [ext_resource type="Script" uid="uid://28ugt8roilfo" path="res://Scripts/Level.cs" id="1_n0qsc"]
+[ext_resource type="Script" uid="uid://c0kxj7t3il721" path="res://Scripts/KeyItem.cs" id="2_3mhv4"]
 [ext_resource type="Script" uid="uid://ccjrdl2vfhqi4" path="res://Scripts/InteractableObject.cs" id="2_dilhk"]
-[ext_resource type="Script" uid="uid://bs21eajd6j5yx" path="res://Scripts/NPC.cs" id="3_3mhv4"]
+[ext_resource type="PackedScene" uid="uid://dlu38fk7unlmp" path="res://Scenes/npc.tscn" id="4_rf6l5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fn0"]
 size = Vector3(20, 1, 20)
@@ -10,9 +11,9 @@ size = Vector3(20, 1, 20)
 [sub_resource type="BoxMesh" id="BoxMesh_80fn0"]
 size = Vector3(20, 1, 20)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbet4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_plxfv"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_06dlc"]
+[sub_resource type="BoxMesh" id="BoxMesh_0h3l5"]
 
 [node name="Node3D" type="Node3D" unique_id=1097642956]
 script = ExtResource("1_n0qsc")
@@ -30,19 +31,37 @@ transform = Transform3D(1, 0, 0, 0, 0.5165352, 0.8562659, 0, -0.8562659, 0.51653
 shadow_enabled = true
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=991753723]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9998636, 4.2858257)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5211651, 4.2858257)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=384389642]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2713315, 0)
-script = ExtResource("3_3mhv4")
+[node name="KeyItem" type="Node3D" parent="." unique_id=1011023482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0040766, 0)
+script = ExtResource("2_3mhv4")
 
-[node name="NPCBody" type="StaticBody3D" parent="Node3D" unique_id=974328577 node_paths=PackedStringArray("_objectToBeInteracted")]
+[node name="StaticBody3D" type="StaticBody3D" parent="KeyItem" unique_id=2064634736 node_paths=PackedStringArray("_objectToBeInteracted")]
 script = ExtResource("2_dilhk")
-Type = 2
+Type = 3
 _objectToBeInteracted = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/NPCBody" unique_id=722257295]
-shape = SubResource("CapsuleShape3D_hbet4")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeyItem/StaticBody3D" unique_id=977166869]
+shape = SubResource("BoxShape3D_plxfv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NPCBody" unique_id=297850383]
-mesh = SubResource("CapsuleMesh_06dlc")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KeyItem/StaticBody3D" unique_id=463251910]
+mesh = SubResource("BoxMesh_0h3l5")
+
+[node name="KeyItem2" type="Node3D" parent="." unique_id=754132426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673587, 1.0040766, 0)
+script = ExtResource("2_3mhv4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="KeyItem2" unique_id=2010121232 node_paths=PackedStringArray("_objectToBeInteracted")]
+script = ExtResource("2_dilhk")
+Type = 3
+_objectToBeInteracted = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeyItem2/StaticBody3D" unique_id=1473378631]
+shape = SubResource("BoxShape3D_plxfv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KeyItem2/StaticBody3D" unique_id=1639405621]
+mesh = SubResource("BoxMesh_0h3l5")
+
+[node name="NPC" parent="." unique_id=1005443460 instance=ExtResource("4_rf6l5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3407736, 1.4999998, 0.10422468)
