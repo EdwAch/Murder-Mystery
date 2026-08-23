@@ -28,7 +28,6 @@ public partial class InteractableObject : StaticBody3D {
 			case InteractType.KeyItem:
 				if (_objectToBeInteracted is KeyItem keyItem && !_keyItemGotten) {
 					_keyItemGotten = true;
-					GD.Print("GOTTEN");
 					keyItem.Interact();
 				}
 				break;

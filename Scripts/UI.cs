@@ -64,16 +64,12 @@ public partial class UI : CanvasLayer {
 		GetTree().Paused = false;
 		PlayerController.Instance.ChangePauseMenuShown(false);
 		PlayerController.Instance.ChangeMouseCapturing(true);
-		GD.Print(_inNPCInteraction);
 		if (_wasAwaitingInteraction) {
 			ShowInteractableMessage();
-			GD.Print("IN IF");
 		} else if(!_wasAwaitingInteraction && !_inNPCInteraction) {
 			HideInteractableMessage();
-			GD.Print("IN ELSEIF1");
 		} else if(!_wasAwaitingInteraction && _inNPCInteraction) {
 			HideInteractableMessage();
-			GD.Print("IN ELSEIF2");
 			PlayerController.Instance.ChangeMouseCapturing(false);
 		}
 	}
