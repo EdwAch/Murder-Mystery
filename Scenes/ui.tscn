@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhrraeon8nd6v" path="res://Scripts/MainMenuUI.cs" id="2_nf4gj"]
 [ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
 [ext_resource type="Script" uid="uid://birfj2xtiuanj" path="res://Scripts/NPCInteraction.cs" id="4_2246s"]
+[ext_resource type="Script" uid="uid://bhcyrxst2t7o6" path="res://Scripts/SettingsMenu.cs" id="5_q7pk6"]
 
 [node name="UI" type="Control" unique_id=116208112]
 process_mode = 3
@@ -15,15 +16,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_pauseMenu", "_loadingScreen", "_interactableMessage", "_NPCInteraction")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_mainMenu", "_pauseMenu", "_loadingScreen", "_interactableMessage", "_NPCInteraction", "_settingsMenu")]
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _mainMenuButton = NodePath("PauseMenu/Panel/MarginContainer/MainMenuButton")
 _quitButton = NodePath("PauseMenu/Panel/MarginContainer3/QuitButton")
+_mainMenu = NodePath("MainMenuUI")
 _pauseMenu = NodePath("PauseMenu")
 _loadingScreen = NodePath("LoadingScreen")
 _interactableMessage = NodePath("InteractableMessage")
 _NPCInteraction = NodePath("NPCInteraction")
+_settingsMenu = NodePath("SettingsMenu")
 
 [node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
 anchors_preset = 15
@@ -330,3 +333,177 @@ theme_override_font_sizes/mono_font_size = 64
 text = "TEMP"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_backButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+script = ExtResource("5_q7pk6")
+_sensitivitySlider = NodePath("Panel/MouseSens/Slider/HSlider")
+_confirmationPopup = NodePath("Panel/ConfirmationPopup")
+_backButton = NodePath("Panel/BackButton/ColorRect/BackButton")
+_confirmationYesButton = NodePath("Panel/ConfirmationPopup/ColorRect/YesButton/Yes")
+_confirmationNoButton = NodePath("Panel/ConfirmationPopup/ColorRect/NoButton/No")
+_confirmationReturnButton = NodePath("Panel/ConfirmationPopup/ColorRect/ReturnButton/Return")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/SettingsMenu" unique_id=511615549]
+layout_mode = 2
+
+[node name="MouseSens" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=783473401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 480
+
+[node name="Text" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/MouseSens" unique_id=607247871]
+layout_mode = 2
+theme_override_constants/margin_right = 700
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/MouseSens/Text" unique_id=1085423856]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SettingsMenu/Panel/MouseSens/Text/ColorRect" unique_id=888113960]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Sensitivity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slider" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/MouseSens" unique_id=624356631]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 800
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/SettingsMenu/Panel/MouseSens/Slider" unique_id=1488345490]
+layout_mode = 2
+min_value = 1.0
+value = 50.0
+
+[node name="BackButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=178489256]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -100.0
+offset_right = -200.0
+offset_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/BackButton" unique_id=1986983041]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BackButton" type="Button" parent="CanvasLayer/SettingsMenu/Panel/BackButton/ColorRect" unique_id=665020609]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 64
+text = "Back"
+
+[node name="ConfirmationPopup" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=1358085546]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup" unique_id=1579965745]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ConfirmationText" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect" unique_id=1025910599]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 300.0
+grow_horizontal = 2
+
+[node name="ConfirmationTextLabel" type="RichTextLabel" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect/ConfirmationText" unique_id=1576907116]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "You have changed certain settings. Are you sure you want to save these changes?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect" unique_id=1600627350]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -473.32996
+offset_top = -280.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Yes" type="Button" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect/YesButton" unique_id=562324012]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Yes"
+
+[node name="NoButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect" unique_id=870762411]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -280.0
+offset_right = 473.32996
+offset_bottom = -100.0
+grow_vertical = 0
+
+[node name="No" type="Button" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect/NoButton" unique_id=859050397]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "No"
+
+[node name="ReturnButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect" unique_id=587961980]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -186.66498
+offset_top = -280.0
+offset_right = 186.66498
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Return" type="Button" parent="CanvasLayer/SettingsMenu/Panel/ConfirmationPopup/ColorRect/ReturnButton" unique_id=1064460710]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Return"

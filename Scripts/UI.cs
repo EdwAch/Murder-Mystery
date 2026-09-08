@@ -8,10 +8,12 @@ public partial class UI : CanvasLayer {
 	[Export] private Button _continueButton;
 	[Export] private Button _mainMenuButton;
 	[Export] private Button _quitButton;
+	[Export] private MarginContainer _mainMenu;
 	[Export] private MarginContainer _pauseMenu;
 	[Export] private MarginContainer _loadingScreen;
 	[Export] private MarginContainer _interactableMessage;
 	[Export] private MarginContainer _NPCInteraction;
+	[Export] private MarginContainer _settingsMenu;
 	private bool _wasAwaitingInteraction = false;
 	private bool _inNPCInteraction = false;
 	public override void _Ready() {
@@ -51,12 +53,21 @@ public partial class UI : CanvasLayer {
 		_loadingScreen.Hide();
 	}
 
+	public void ShowMainMenu(bool value) {
+		_mainMenu.Visible = value;
+	}
+
 	public void ShowInteractableMessage() {
 		_interactableMessage.Visible = true;
 	}
 
 	public void HideInteractableMessage() {
 		_interactableMessage.Visible = false;
+	}
+
+	public void ShowSettingsMenu(bool value) {
+		_settingsMenu.Visible = value;
+		
 	}
 	
 	private void ContinueButtonPressed() {

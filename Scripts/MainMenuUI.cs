@@ -23,9 +23,9 @@ public partial class MainMenuUI : MarginContainer{
 
 	private void PlayerInLobby(bool inLobby) {
 		if (inLobby) {
-			this.Visible = true;
+			UI.Instance.ShowMainMenu(inLobby);
 		} else {
-			this.Visible = false;
+			UI.Instance.ShowMainMenu(inLobby);
 			PlayerController.Instance.ChangeInMainMenuBool(false);
 			PlayerController.Instance.ChangeMouseCapturing(true);
 		}
@@ -40,7 +40,8 @@ public partial class MainMenuUI : MarginContainer{
 	}
 
 	private void SettingsButtonPressed() {
-		return;
+		UI.Instance.ShowMainMenu(false);
+		UI.Instance.ShowSettingsMenu(true);
 	}
 
 	private void QuitButtonPressed() {
