@@ -113,4 +113,8 @@ public partial class PlayerController : CharacterBody3D {
 	public void ChangeInMainMenuBool(bool value) {
 		_inMainMenu = value;
 	}
+
+	public void ChangeSensitivity(float newSensitivity) {
+		_mouseSensitivity = newSensitivity;
+	}
 }

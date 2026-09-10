@@ -334,7 +334,7 @@ text = "TEMP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_backButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton")]
+[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_backButton", "_defaultButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton", "_confirmationText")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -349,9 +349,11 @@ script = ExtResource("5_q7pk6")
 _sensitivitySlider = NodePath("Panel/MouseSens/Slider/HSlider")
 _confirmationPopup = NodePath("Panel/ConfirmationPopup")
 _backButton = NodePath("Panel/BackButton/ColorRect/BackButton")
+_defaultButton = NodePath("Panel/DefaultButton/ColorRect/DefaultButton")
 _confirmationYesButton = NodePath("Panel/ConfirmationPopup/ColorRect/YesButton/Yes")
 _confirmationNoButton = NodePath("Panel/ConfirmationPopup/ColorRect/NoButton/No")
 _confirmationReturnButton = NodePath("Panel/ConfirmationPopup/ColorRect/ReturnButton/Return")
+_confirmationText = NodePath("Panel/ConfirmationPopup/ColorRect/ConfirmationText/ConfirmationTextLabel")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/SettingsMenu" unique_id=511615549]
 layout_mode = 2
@@ -406,9 +408,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -200.0
+offset_left = -250.0
 offset_top = -100.0
-offset_right = -200.0
+offset_right = -250.0
 offset_bottom = -100.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -420,10 +422,31 @@ color = Color(0, 0, 0, 1)
 
 [node name="BackButton" type="Button" parent="CanvasLayer/SettingsMenu/Panel/BackButton/ColorRect" unique_id=665020609]
 layout_mode = 0
-offset_right = 200.0
+offset_right = 250.0
 offset_bottom = 100.0
 theme_override_font_sizes/font_size = 64
 text = "Back"
+
+[node name="DefaultButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=2017101057]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_bottom = -100.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/DefaultButton" unique_id=1397267464]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DefaultButton" type="Button" parent="CanvasLayer/SettingsMenu/Panel/DefaultButton/ColorRect" unique_id=818591441]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 64
+text = "Default"
 
 [node name="ConfirmationPopup" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=1358085546]
 visible = false
