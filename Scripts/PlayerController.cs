@@ -69,6 +69,9 @@ public partial class PlayerController : CharacterBody3D {
 					interactable.Interact(this);
 					interactable.ShowLabel(false);
 				}
+			} else if (_previousInteractable != null) {
+				_previousInteractable.ShowLabel(false);
+				_previousInteractable = null;
 			}
 		} else if (_previousInteractable != null){
 			_previousInteractable.ShowLabel(false);

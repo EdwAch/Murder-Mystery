@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
 [ext_resource type="Script" uid="uid://birfj2xtiuanj" path="res://Scripts/NPCInteraction.cs" id="4_2246s"]
 [ext_resource type="Script" uid="uid://bhcyrxst2t7o6" path="res://Scripts/SettingsMenu.cs" id="5_q7pk6"]
+[ext_resource type="Script" uid="uid://bxduhiq8ci276" path="res://Scripts/RemapButton.cs" id="6_m78vo"]
 
 [node name="UI" type="Control" unique_id=116208112]
 process_mode = 3
@@ -334,7 +335,7 @@ text = "TEMP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_backButton", "_defaultButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton", "_confirmationText")]
+[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_interactionButton", "_backButton", "_defaultButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton", "_confirmationText")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -348,6 +349,7 @@ theme_override_constants/margin_bottom = 200
 script = ExtResource("5_q7pk6")
 _sensitivitySlider = NodePath("Panel/MouseSens/Slider/HSlider")
 _confirmationPopup = NodePath("Panel/ConfirmationPopup")
+_interactionButton = NodePath("Panel/InteractionInput/InteractionInputButton/InteractionButton")
 _backButton = NodePath("Panel/BackButton/ColorRect/BackButton")
 _defaultButton = NodePath("Panel/DefaultButton/ColorRect/DefaultButton")
 _confirmationYesButton = NodePath("Panel/ConfirmationPopup/ColorRect/YesButton/Yes")
@@ -400,6 +402,50 @@ theme_override_constants/margin_left = 800
 layout_mode = 2
 min_value = 1.0
 value = 50.0
+
+[node name="InteractionInput" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=1739403911]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 330
+
+[node name="Text" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/InteractionInput" unique_id=1970662031]
+layout_mode = 2
+theme_override_constants/margin_right = 700
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/InteractionInput/Text" unique_id=1051088585]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SettingsMenu/Panel/InteractionInput/Text/ColorRect" unique_id=305818295]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionInputButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/InteractionInput" unique_id=636583989]
+layout_mode = 2
+theme_override_constants/margin_left = 800
+
+[node name="InteractionButton" type="Button" parent="CanvasLayer/SettingsMenu/Panel/InteractionInput/InteractionInputButton" unique_id=1430008070]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "E"
+script = ExtResource("6_m78vo")
+_name = "Interact"
 
 [node name="BackButton" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=178489256]
 layout_mode = 1

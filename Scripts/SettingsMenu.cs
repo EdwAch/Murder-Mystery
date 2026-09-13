@@ -2,9 +2,10 @@ using Godot;
 using System;
 
 public partial class SettingsMenu : MarginContainer {
-	
+	public static SettingsMenu Instance { get; private set; }
 	[Export] private HSlider _sensitivitySlider;
 	[Export] private MarginContainer _confirmationPopup;
+	[Export] private Button _interactionButton;
 	[Export] private Button _backButton;
 	[Export] private Button _defaultButton;
 	[Export] private Button _confirmationYesButton;
@@ -17,7 +18,9 @@ public partial class SettingsMenu : MarginContainer {
 	private float _newSensitivity;
 	private float _playerChosenSensitivity;
 	private bool _settingsChanged = false;
+	private Key _inputtedKey;
 	public override void _Ready() {
+		Instance = this;
 		_sensitivitySlider.ValueChanged += OnSensitivitySliderValueChanged;
 		_backButton.Pressed += BackButtonPressed;
 		_defaultButton.Pressed += DefaultButtonPressed;
@@ -93,11 +96,26 @@ public partial class SettingsMenu : MarginContainer {
 		_newSensitivity = BaseSensitivity;
 		PlayerController.Instance.ChangeSensitivity(BaseSensitivity);
 		_sensitivitySlider.Value = 50;
+		ReturnKeyToDefault("Interact", Key.E);
+		_interactionButton.Text = "E";
 	}
 
 	private void UpdateSettings() {
 		_playerChosenSensitivity = _newSensitivity;
 		PlayerController.Instance.ChangeSensitivity(_newSensitivity);
 		_settingsChanged = false;
+	}
+
+	private void ReturnKeyToDefault(StringName name, Key key) {
+		InputMap.ActionEraseEvents(name);
+
+		var physicalEvent = new InputEventKey{
+			PhysicalKeycode = key
+		};
+		InputMap.ActionAddEvent(name, physicalEvent);
+	}
+
+	public void SettingsChanged() {
+		_settingsChanged = true;
 	}
 }
