@@ -9,6 +9,7 @@ public partial class RemapButton : Button {
     public override void _Ready() {
         Pressed += () => {
 			_listeningForInput = true;
+			SettingsMenu.Instance.AwaitingKeyInput(true);
 			this.Text = "Press any key..";
 		};
     }
@@ -25,8 +26,12 @@ public partial class RemapButton : Button {
 			InputMap.ActionAddEvent(_name, physicalEvent);
 
 			this.Text = physicalEvent.AsTextPhysicalKeycode();
+			if (_name == "Interact") {
+				InteractablePromptKeyGetting.Instance.NewKeyUsed(physicalEvent.AsTextPhysicalKeycode());
+			}
 			_listeningForInput = false;
 			GetViewport().SetInputAsHandled();
+			SettingsMenu.Instance.AwaitingKeyInput(false);
 			SettingsMenu.Instance.SettingsChanged();
 		}
     }

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhrraeon8nd6v" path="res://Scripts/MainMenuUI.cs" id="2_nf4gj"]
 [ext_resource type="Script" uid="uid://diqxhtwutfygg" path="res://Scripts/TutorialUI.cs" id="2_qdvrb"]
 [ext_resource type="Script" uid="uid://birfj2xtiuanj" path="res://Scripts/NPCInteraction.cs" id="4_2246s"]
+[ext_resource type="Script" uid="uid://dlrpfp5gl3o13" path="res://Scripts/InteractablePromptKeyGetting.cs" id="4_smcll"]
 [ext_resource type="Script" uid="uid://bhcyrxst2t7o6" path="res://Scripts/SettingsMenu.cs" id="5_q7pk6"]
 [ext_resource type="Script" uid="uid://bxduhiq8ci276" path="res://Scripts/RemapButton.cs" id="6_m78vo"]
 
@@ -277,7 +278,7 @@ text = "[b]Loading.."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InteractableMessage" type="MarginContainer" parent="CanvasLayer" unique_id=828834852]
+[node name="InteractableMessage" type="MarginContainer" parent="CanvasLayer" unique_id=828834852 node_paths=PackedStringArray("_text")]
 visible = false
 custom_minimum_size = Vector2(200, 100)
 anchors_preset = 15
@@ -290,8 +291,10 @@ theme_override_constants/margin_left = 700
 theme_override_constants/margin_top = 600
 theme_override_constants/margin_right = 700
 theme_override_constants/margin_bottom = 380
+script = ExtResource("4_smcll")
+_text = NodePath("InteractablePrompt")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/InteractableMessage" unique_id=465686341]
+[node name="InteractablePrompt" type="RichTextLabel" parent="CanvasLayer/InteractableMessage" unique_id=465686341]
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
@@ -335,7 +338,7 @@ text = "TEMP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_interactionButton", "_backButton", "_defaultButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton", "_confirmationText")]
+[node name="SettingsMenu" type="MarginContainer" parent="CanvasLayer" unique_id=1992830019 node_paths=PackedStringArray("_sensitivitySlider", "_confirmationPopup", "_inputKeyContainer", "_interactionButton", "_backButton", "_defaultButton", "_confirmationYesButton", "_confirmationNoButton", "_confirmationReturnButton", "_inputOkButton", "_confirmationText")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -349,12 +352,14 @@ theme_override_constants/margin_bottom = 200
 script = ExtResource("5_q7pk6")
 _sensitivitySlider = NodePath("Panel/MouseSens/Slider/HSlider")
 _confirmationPopup = NodePath("Panel/ConfirmationPopup")
+_inputKeyContainer = NodePath("Panel/InputKeyContainer")
 _interactionButton = NodePath("Panel/InteractionInput/InteractionInputButton/InteractionButton")
 _backButton = NodePath("Panel/BackButton/ColorRect/BackButton")
 _defaultButton = NodePath("Panel/DefaultButton/ColorRect/DefaultButton")
 _confirmationYesButton = NodePath("Panel/ConfirmationPopup/ColorRect/YesButton/Yes")
 _confirmationNoButton = NodePath("Panel/ConfirmationPopup/ColorRect/NoButton/No")
 _confirmationReturnButton = NodePath("Panel/ConfirmationPopup/ColorRect/ReturnButton/Return")
+_inputOkButton = NodePath("Panel/InputKeyContainer/ColorRect/Button/OkButton")
 _confirmationText = NodePath("Panel/ConfirmationPopup/ColorRect/ConfirmationText/ConfirmationTextLabel")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/SettingsMenu" unique_id=511615549]
@@ -576,3 +581,48 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Return"
+
+[node name="InputKeyContainer" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel" unique_id=204132419]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SettingsMenu/Panel/InputKeyContainer" unique_id=1956485069]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/InputKeyContainer/ColorRect" unique_id=1396537261]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 300.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SettingsMenu/Panel/InputKeyContainer/ColorRect/Text" unique_id=1415724583]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "You have to press a key before going back or resetting to default."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="MarginContainer" parent="CanvasLayer/SettingsMenu/Panel/InputKeyContainer/ColorRect" unique_id=225581921]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 100
+
+[node name="OkButton" type="Button" parent="CanvasLayer/SettingsMenu/Panel/InputKeyContainer/ColorRect/Button" unique_id=602717508]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Ok"

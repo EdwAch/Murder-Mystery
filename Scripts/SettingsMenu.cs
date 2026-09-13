@@ -5,12 +5,14 @@ public partial class SettingsMenu : MarginContainer {
 	public static SettingsMenu Instance { get; private set; }
 	[Export] private HSlider _sensitivitySlider;
 	[Export] private MarginContainer _confirmationPopup;
+	[Export] private MarginContainer _inputKeyContainer;
 	[Export] private Button _interactionButton;
 	[Export] private Button _backButton;
 	[Export] private Button _defaultButton;
 	[Export] private Button _confirmationYesButton;
 	[Export] private Button _confirmationNoButton;
 	[Export] private Button _confirmationReturnButton;
+	[Export] private Button _inputOkButton;
 	[Export] private RichTextLabel _confirmationText;
 	private string[] _confirmationType = {"Default", "Change"};
 	private bool _returnValuesToDefault = false;
@@ -18,7 +20,7 @@ public partial class SettingsMenu : MarginContainer {
 	private float _newSensitivity;
 	private float _playerChosenSensitivity;
 	private bool _settingsChanged = false;
-	private Key _inputtedKey;
+	private bool _awaitingKeyInput = false;
 	public override void _Ready() {
 		Instance = this;
 		_sensitivitySlider.ValueChanged += OnSensitivitySliderValueChanged;
@@ -27,6 +29,7 @@ public partial class SettingsMenu : MarginContainer {
 		_confirmationYesButton.Pressed += ConfirmationYesButtonPressed;
 		_confirmationNoButton.Pressed += ConfirmationNoButtonPressed;
 		_confirmationReturnButton.Pressed += ConfirmationReturnButtonPressed;
+		_inputOkButton.Pressed += InputOkButtonPressed;
 	}
 
 	private void OnSensitivitySliderValueChanged(double value) {
@@ -52,7 +55,9 @@ public partial class SettingsMenu : MarginContainer {
 	}
 
 	private void BackButtonPressed() {
-		if (_settingsChanged) {
+		if (_awaitingKeyInput) {
+			ShowInputKeyContainer(true);
+		} else if (_settingsChanged) {
 			ShowConfirmationPopup(true, _confirmationType[1]);
 		} else {
 			UI.Instance.ShowSettingsMenu(false);
@@ -61,7 +66,11 @@ public partial class SettingsMenu : MarginContainer {
 	}
 
 	private void DefaultButtonPressed() {
-		ShowConfirmationPopup(true, _confirmationType[0]);
+		if (_awaitingKeyInput) {
+			ShowInputKeyContainer(true);
+		} else {
+			ShowConfirmationPopup(true, _confirmationType[0]);
+		}
 	}
 
 	private void ConfirmationYesButtonPressed() {
@@ -88,6 +97,10 @@ public partial class SettingsMenu : MarginContainer {
 		ShowConfirmationPopup(false, _confirmationType[1]);
 	}
 
+	private void InputOkButtonPressed() {
+		ShowInputKeyContainer(false);
+	}
+
 	private void ShowConfirmationReturnButton(bool value) {
 		_confirmationReturnButton.Visible = value;
 	}
@@ -101,8 +114,10 @@ public partial class SettingsMenu : MarginContainer {
 	}
 
 	private void UpdateSettings() {
-		_playerChosenSensitivity = _newSensitivity;
-		PlayerController.Instance.ChangeSensitivity(_newSensitivity);
+		if (_playerChosenSensitivity != 0) {
+			_playerChosenSensitivity = _newSensitivity;
+			PlayerController.Instance.ChangeSensitivity(_newSensitivity);
+		}
 		_settingsChanged = false;
 	}
 
@@ -115,7 +130,15 @@ public partial class SettingsMenu : MarginContainer {
 		InputMap.ActionAddEvent(name, physicalEvent);
 	}
 
+	private void ShowInputKeyContainer(bool value) {
+		_inputKeyContainer.Visible = value;
+	}
+
 	public void SettingsChanged() {
 		_settingsChanged = true;
+	}
+
+	public void AwaitingKeyInput(bool value) {
+		_awaitingKeyInput = value;
 	}
 }
