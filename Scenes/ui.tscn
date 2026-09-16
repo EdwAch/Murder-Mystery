@@ -19,6 +19,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=997312398 node_paths=PackedStringArray("_continueButton", "_mainMenuButton", "_quitButton", "_mainMenu", "_pauseMenu", "_loadingScreen", "_interactableMessage", "_NPCInteraction", "_settingsMenu")]
+process_mode = 3
 script = ExtResource("1_jxero")
 _continueButton = NodePath("PauseMenu/Panel/MarginContainer2/ContinueButton")
 _mainMenuButton = NodePath("PauseMenu/Panel/MarginContainer/MainMenuButton")

@@ -9,8 +9,6 @@ public partial class PlayerController : CharacterBody3D {
 	[Export] private float _mouseSensitivity;
 	[Export] private Camera3D _camera;
 	[Export] private RayCast3D _interactionRay;
-	private bool _pauseMenuShown = false;
-	private bool _inMainMenu = true;
 	private bool _disableMovementInput = false;
 	private InteractableObject _previousInteractable;
 	public override void _Ready() {
@@ -18,17 +16,6 @@ public partial class PlayerController : CharacterBody3D {
 		Instance = this;
 	}
 
-    public override void _Process(double delta) {
-        if (!_inMainMenu && Input.IsActionJustPressed("Escape")) {
-			if (_pauseMenuShown) {
-				UI.Instance.HidePauseMenu(); 
-			} else {
-				UI.Instance.ShowPauseMenu();
-			}
-			_pauseMenuShown = !_pauseMenuShown;
-			ChangeMouseCapturing(false);
-		}
-    }
 
 	public override void _PhysicsProcess(double delta)	{
 		Vector3 velocity = Velocity;
@@ -97,9 +84,6 @@ public partial class PlayerController : CharacterBody3D {
 		}
 	}
 
-	public void ChangePauseMenuShown(bool value) {
-		_pauseMenuShown = value;
-	}
 
 	public void DetachCamera(bool value) {
 		if (value) {
@@ -113,9 +97,6 @@ public partial class PlayerController : CharacterBody3D {
 		_disableMovementInput = value;
 	}
 
-	public void ChangeInMainMenuBool(bool value) {
-		_inMainMenu = value;
-	}
 
 	public void ChangeSensitivity(float newSensitivity) {
 		_mouseSensitivity = newSensitivity;

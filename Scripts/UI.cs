@@ -16,6 +16,8 @@ public partial class UI : CanvasLayer {
 	[Export] private MarginContainer _settingsMenu;
 	private bool _wasAwaitingInteraction = false;
 	private bool _inNPCInteraction = false;
+	private bool _pauseMenuShown = false;
+	private bool _inMainMenu = true;
 	public override void _Ready() {
 		Instance = this;
 		_continueButton.Pressed += ContinueButtonPressed;
@@ -24,6 +26,18 @@ public partial class UI : CanvasLayer {
 		HidePauseMenu();
 		HideLoadingScreen();
 	}
+
+    public override void _Process(double delta) {
+        if (!_inMainMenu && Input.IsActionJustPressed("Escape")) {
+			if (_pauseMenuShown) {
+				HidePauseMenu(); 
+				ContinueButtonPressed();
+			} else {
+				ShowPauseMenu();
+				PlayerController.Instance.ChangeMouseCapturing(false);
+			}
+		}
+    }
 
 	public void ChangeInNPCInteractionBool(bool value) {
 		_inNPCInteraction = value;
@@ -36,12 +50,14 @@ public partial class UI : CanvasLayer {
 		} else {
 			_wasAwaitingInteraction = false;
 		}
+		_pauseMenuShown = true;
 		EmitSignal(SignalName.GamePaused, true);
 		GetTree().Paused = true;
 	}
 
 	public void HidePauseMenu() {
 		_pauseMenu.Hide();
+		_pauseMenuShown = false;
 		EmitSignal(SignalName.GamePaused, false);
 	}
 
@@ -55,6 +71,7 @@ public partial class UI : CanvasLayer {
 
 	public void ShowMainMenu(bool value) {
 		_mainMenu.Visible = value;
+		_inMainMenu = value;
 	}
 
 	public void ShowInteractableMessage() {
@@ -73,7 +90,6 @@ public partial class UI : CanvasLayer {
 	private void ContinueButtonPressed() {
 		HidePauseMenu();
 		GetTree().Paused = false;
-		PlayerController.Instance.ChangePauseMenuShown(false);
 		PlayerController.Instance.ChangeMouseCapturing(true);
 		if (_wasAwaitingInteraction) {
 			ShowInteractableMessage();
@@ -86,11 +102,11 @@ public partial class UI : CanvasLayer {
 	}
 	private void MainMenuButtonPressed() {
 		_wasAwaitingInteraction = false;
+		_inMainMenu = true;
 		HidePauseMenu();
 		GetTree().Paused = false;
 		HideInteractableMessage();
 		_NPCInteraction.Hide();
-		PlayerController.Instance.ChangePauseMenuShown(false);
 		GameManager.Instance.GoToLevel(0);
 	}
 
