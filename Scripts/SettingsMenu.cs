@@ -111,6 +111,8 @@ public partial class SettingsMenu : MarginContainer {
 		_sensitivitySlider.Value = 50;
 		ReturnKeyToDefault("Interact", Key.E);
 		_interactionButton.Text = "E";
+		InteractablePromptKeyGetting.Instance.NewKeyUsed("E");
+		_settingsChanged = false;
 	}
 
 	private void UpdateSettings() {
