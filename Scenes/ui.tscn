@@ -31,7 +31,7 @@ _interactableMessage = NodePath("InteractableMessage")
 _NPCInteraction = NodePath("NPCInteraction")
 _settingsMenu = NodePath("SettingsMenu")
 
-[node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_continueGameButton", "_settingsButton", "_quitButton")]
+[node name="MainMenuUI" type="MarginContainer" parent="CanvasLayer" unique_id=570572185 node_paths=PackedStringArray("_newGameButton", "_settingsButton", "_quitButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,7 +39,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_nf4gj")
 _newGameButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/NewGameContainer/NewGameButton")
-_continueGameButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/ContinueContainer/ContinueButton")
 _settingsButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/SettingsButtonContainer/SettingsButton")
 _quitButton = NodePath("MainMenu/ButtonsContainer/ButtonsBackground/QuitGameContainer/QuitGameButton")
 
@@ -87,24 +86,6 @@ theme_override_constants/margin_bottom = 300
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "New Game"
-
-[node name="ContinueContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=1770962791]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 220
-
-[node name="ContinueButton" type="Button" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground/ContinueContainer" unique_id=1902803859]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Continue"
 
 [node name="SettingsButtonContainer" type="MarginContainer" parent="CanvasLayer/MainMenuUI/MainMenu/ButtonsContainer/ButtonsBackground" unique_id=206555126]
 layout_mode = 1
