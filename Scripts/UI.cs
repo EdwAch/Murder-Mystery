@@ -25,6 +25,7 @@ public partial class UI : CanvasLayer {
 		_quitButton.Pressed += QuitButtonPressed;
 		HidePauseMenu();
 		HideLoadingScreen();
+		CallDeferred(MethodName.SubscribeToSignals);
 	}
 
     public override void _Process(double delta) {
@@ -39,8 +40,12 @@ public partial class UI : CanvasLayer {
 		}
     }
 
-	public void ChangeInNPCInteractionBool(bool value) {
-		_inNPCInteraction = value;
+	private void SubscribeToSignals() {
+		NPCInteraction.Instance.InNPCInteraction += PlayerInNPCInteraction;
+	}
+
+	private void PlayerInNPCInteraction(bool inInteraction) {
+		_inNPCInteraction = inInteraction;
 	}
 
 	public void ShowPauseMenu() {

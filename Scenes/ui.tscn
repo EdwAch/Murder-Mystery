@@ -205,7 +205,7 @@ theme_override_constants/margin_right = 1050
 theme_override_constants/margin_bottom = 780
 script = ExtResource("2_qdvrb")
 _tutorialText = NodePath("MarginContainer2/ColorRect/TutorialText")
-_tutorials = PackedStringArray("Move with W, A, S, and D", "Press Space to jump")
+_tutorials = PackedStringArray("Move with W, A, S, and D", "Press Space to jump", "Press E while looking at an interactable to interact with it.")
 _loadingBar = NodePath("Control/LoadingBar")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/TutorialHUD" unique_id=529577342]
@@ -222,6 +222,7 @@ offset_bottom = 200.0
 theme_override_font_sizes/normal_font_size = 64
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
+fit_content = true
 
 [node name="Control" type="Control" parent="CanvasLayer/TutorialHUD" unique_id=783498987]
 layout_mode = 2

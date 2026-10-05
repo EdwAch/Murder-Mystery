@@ -11,7 +11,9 @@ public partial class TutorialUI : MarginContainer {
 	private int _tutorialNumber = 0;
 	private bool _hasMoved = false;
 	private bool _hasJumped = false;
+	private bool _hasInteracted = false;
 	private bool _inMainMenu;
+	private bool _inNPCInteraction = false;
 	private const float FadeTime = 0.3f;
 	public override void _Ready() {
 		CallDeferred(MethodName.SubscribeToSignals);
@@ -31,6 +33,12 @@ public partial class TutorialUI : MarginContainer {
 
 			if (_hasMoved && !_hasJumped && Input.IsActionJustPressed("Jump")) {
 				_hasJumped = true;
+				UpdateTutorialText(_tutorials[_tutorialNumber], 2);
+				_tutorialNumber++;
+			}
+
+			if (_hasJumped && _inNPCInteraction) {
+				_hasInteracted = true;
 				UpdateTutorialText(_tutorials[0], 2);
 				_tutorialNumber = 0;
 			}
@@ -41,6 +49,8 @@ public partial class TutorialUI : MarginContainer {
 		UI.Instance.GamePaused += OnGamePaused;
 		GameManager.Instance.InLobby += PlayerInLobby;
 		PlayerInLobby(GameManager.Instance.IsInLobby);
+		NPCInteraction.Instance.InNPCInteraction += PlayerInNPCInteraction;
+		RemapButton.Instance.ButtonRemapped += OnButtonRemapped;
 	}
 
 	private void OnGamePaused(bool isPaused) {
@@ -60,6 +70,16 @@ public partial class TutorialUI : MarginContainer {
 			this.Visible = false;
 		} else {
 			this.Visible = true;
+		}
+	}
+
+	private void PlayerInNPCInteraction(bool inInteraction) {
+		_inNPCInteraction = inInteraction;
+	}
+
+	private void OnButtonRemapped(string actionName, string key) {
+		if (actionName == "Interact") {
+			_tutorials[2] = $"Press {key} while looking at an interactable to interact with it.";
 		}
 	}
 

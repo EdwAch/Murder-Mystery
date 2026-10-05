@@ -2,11 +2,14 @@ using Godot;
 using System;
 
 public partial class RemapButton : Button {
-	
+	public static RemapButton Instance { get; private set; }
+	[Signal]
+	public delegate void ButtonRemappedEventHandler(string actionName, string key);
 	[Export] private string _name;
 	private bool _listeningForInput = false;
 
     public override void _Ready() {
+		Instance = this;
         Pressed += () => {
 			_listeningForInput = true;
 			SettingsMenu.Instance.AwaitingKeyInput(true);
@@ -25,10 +28,12 @@ public partial class RemapButton : Button {
 			};
 			InputMap.ActionAddEvent(_name, physicalEvent);
 
-			this.Text = physicalEvent.AsTextPhysicalKeycode();
+			string key = physicalEvent.AsTextPhysicalKeycode();
+			this.Text = key;
 			if (_name == "Interact") {
-				InteractablePromptKeyGetting.Instance.NewKeyUsed(physicalEvent.AsTextPhysicalKeycode());
+				InteractablePromptKeyGetting.Instance.NewKeyUsed(key);
 			}
+			EmitSignal(SignalName.ButtonRemapped, _name, key);
 			_listeningForInput = false;
 			GetViewport().SetInputAsHandled();
 			SettingsMenu.Instance.AwaitingKeyInput(false);

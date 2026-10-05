@@ -3,6 +3,8 @@ using System;
 
 public partial class NPCInteraction : MarginContainer {
 	public static NPCInteraction Instance { get; private set; }
+	[Signal]
+	public delegate void InNPCInteractionEventHandler(bool inInteraction);
 	private bool _inInteraction = false;
 	private bool _wasInteracting = false;
 
@@ -20,13 +22,13 @@ public partial class NPCInteraction : MarginContainer {
 	public void ShowNPCInteraction() {
 		this.Show();
 		_inInteraction = true;
-		UI.Instance.ChangeInNPCInteractionBool(true);
+		EmitSignal(SignalName.InNPCInteraction, true);
 	}
 
 	public void HideNPCInteraction() {
 		this.Hide();
 		_inInteraction = false;
-		//UI.Instance.ChangeInNPCInteractionBool(false);
+		EmitSignal(SignalName.InNPCInteraction, false);
 	}
 
 	private void OnGamePaused(bool isPaused) {
@@ -43,7 +45,7 @@ public partial class NPCInteraction : MarginContainer {
 		if (inLobby) {
 			HideNPCInteraction();
 			_wasInteracting = false;
-			UI.Instance.ChangeInNPCInteractionBool(false);
+			EmitSignal(SignalName.InNPCInteraction, false);
 		}
 	}
 }
