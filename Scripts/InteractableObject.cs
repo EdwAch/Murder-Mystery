@@ -2,7 +2,6 @@ using Godot;
 using System;
 
 public partial class InteractableObject : StaticBody3D {
-
 	private enum InteractType { Door, BreakableObject, NPC, KeyItem}
 	[Export] private InteractType Type;
 	[Export] private Node3D _objectToBeInteracted;
@@ -10,7 +9,9 @@ public partial class InteractableObject : StaticBody3D {
     public override void _Ready() {
         CallDeferred(MethodName.SubscribeToSignals);
 	}
+	
 	public void Interact(Node3D interactor) {
+		GameManager.Instance.EmitInteractedSignal(true);
 		switch (Type) {
 			case InteractType.Door:
 				if (_objectToBeInteracted is Door door) {
@@ -42,11 +43,11 @@ public partial class InteractableObject : StaticBody3D {
 		}
 	}
 
-	private void OnGamePaused(bool isPaused) {
-		ShowLabel(!isPaused);
-	}
-
 	private void SubscribeToSignals() {
 		UI.Instance.GamePaused += OnGamePaused;
+	}
+
+	private void OnGamePaused(bool isPaused) {
+		ShowLabel(!isPaused);
 	}
 }

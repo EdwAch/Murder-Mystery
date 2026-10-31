@@ -37,8 +37,7 @@ public partial class TutorialUI : MarginContainer {
 				_tutorialNumber++;
 			}
 
-			if (_hasJumped && _inNPCInteraction) {
-				_hasInteracted = true;
+			if (_hasJumped && _hasInteracted) {
 				UpdateTutorialText(_tutorials[0], 2);
 				_tutorialNumber = 0;
 			}
@@ -49,6 +48,7 @@ public partial class TutorialUI : MarginContainer {
 		UI.Instance.GamePaused += OnGamePaused;
 		GameManager.Instance.InLobby += PlayerInLobby;
 		PlayerInLobby(GameManager.Instance.IsInLobby);
+		GameManager.Instance.HasInteracted += PlayerHasInteracted;
 		NPCInteraction.Instance.InNPCInteraction += PlayerInNPCInteraction;
 		RemapButton.Instance.ButtonRemapped += OnButtonRemapped;
 	}
@@ -77,9 +77,15 @@ public partial class TutorialUI : MarginContainer {
 		_inNPCInteraction = inInteraction;
 	}
 
+	private void PlayerHasInteracted(bool hasInteracted) {
+		if (_hasJumped) {
+			_hasInteracted = hasInteracted;
+		}
+	}
+
 	private void OnButtonRemapped(string actionName, string key) {
 		if (actionName == "Interact") {
-			_tutorials[2] = $"Press {key} while looking at an interactable to interact with it.";
+			_tutorials[2] = $"Press {key} while looking at an interactable object or NPC to interact with it.";
 		}
 	}
 

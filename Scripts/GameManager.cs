@@ -6,6 +6,8 @@ public partial class GameManager : Node3D {
 
 	[Signal]
 	public delegate void InLobbyEventHandler(bool inLobby);
+	[Signal]
+	public delegate void HasInteractedEventHandler(bool hasInteracted);
 	[Export] private string[] _levelListUids;
 	private static int _levelNumber = 0;
 	public bool IsInLobby { get; private set; } = true;
@@ -24,5 +26,9 @@ public partial class GameManager : Node3D {
 		}
 		EmitSignal(SignalName.InLobby, IsInLobby);
 		LevelManager.Instance.LoadLevelAsync(_levelListUids[_levelNumber]);
+	}
+
+	public void EmitInteractedSignal(bool hasInteracted) {
+		EmitSignal(SignalName.HasInteracted, hasInteracted);
 	}
 }
