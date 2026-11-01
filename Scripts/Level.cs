@@ -15,9 +15,11 @@ public partial class Level : Node3D {
 		if (inLobby) {
 			PlayerController.Instance.DetachCamera(true);
 			PlayerController.Instance.DisableMovementInput(true);
+			PlayerController.Instance.DisableCameraZooming(true);
 		} else {
 			PlayerController.Instance.DetachCamera(false);
 			PlayerController.Instance.DisableMovementInput(false);
+			PlayerController.Instance.DisableCameraZooming(false);
 		}
 	}
 }

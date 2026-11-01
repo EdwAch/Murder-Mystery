@@ -12,6 +12,8 @@ public partial class TutorialUI : MarginContainer {
 	private bool _hasMoved = false;
 	private bool _hasJumped = false;
 	private bool _hasInteracted = false;
+	private bool _passedInteraction = false;
+	private bool _hasZoomed = false;
 	private bool _inMainMenu;
 	private bool _inNPCInteraction = false;
 	private const float FadeTime = 0.3f;
@@ -37,7 +39,14 @@ public partial class TutorialUI : MarginContainer {
 				_tutorialNumber++;
 			}
 
-			if (_hasJumped && _hasInteracted) {
+			if (_hasJumped && _hasInteracted && !_passedInteraction) {
+				_passedInteraction = true;
+				UpdateTutorialText(_tutorials[_tutorialNumber], 2);
+				_tutorialNumber++;
+			}
+
+			if (_passedInteraction && Input.IsActionJustPressed("Zoom")) {
+				_hasZoomed = true;
 				UpdateTutorialText(_tutorials[0], 2);
 				_tutorialNumber = 0;
 			}

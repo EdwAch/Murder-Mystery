@@ -7,9 +7,12 @@ public partial class PlayerController : CharacterBody3D {
 	[Export] private float _jumpVelocity;
 	[Export] private float _gravity;
 	[Export] private float _mouseSensitivity;
+	[Export] private float _defaultCameraFOV;
+	[Export] private float _zoomedCameraFOV;
 	[Export] private Camera3D _camera;
 	[Export] private RayCast3D _interactionRay;
 	private bool _disableMovementInput = false;
+	private bool _disableCameraZooming = false;
 	private InteractableObject _previousInteractable;
 	public override void _Ready() {
 		LevelManager.Instance.RegisterPlayer(this);
@@ -43,6 +46,14 @@ public partial class PlayerController : CharacterBody3D {
 			Velocity = velocity;
 			HandleInteraction();
 			MoveAndSlide();
+		}
+		
+		if (!_disableCameraZooming) {
+			if (Input.IsActionPressed("Zoom")) {
+				ZoomCamera(_zoomedCameraFOV);
+			} else {
+				ZoomCamera(_defaultCameraFOV);
+			}
 		}
 	}
 
@@ -84,6 +95,12 @@ public partial class PlayerController : CharacterBody3D {
 		}
 	}
 
+	private void ZoomCamera(float fov) {
+		if (_camera.Fov != fov) {
+			_camera.Fov = Mathf.Lerp(_camera.Fov, fov, 0.2f);
+		}
+	}
+
 
 	public void DetachCamera(bool value) {
 		if (value) {
@@ -95,6 +112,10 @@ public partial class PlayerController : CharacterBody3D {
 
 	public void DisableMovementInput(bool value) {
 		_disableMovementInput = value;
+	}
+
+	public void DisableCameraZooming(bool value) {
+		_disableCameraZooming = value;
 	}
 
 
