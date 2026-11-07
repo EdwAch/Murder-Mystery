@@ -62,6 +62,7 @@ public partial class SettingsMenu : MarginContainer {
 		} else {
 			UI.Instance.ShowSettingsMenu(false);
 			UI.Instance.ShowMainMenu(true);
+			UI.Instance.ChangeMainMenuBool(true);
 		}
 	}
 
@@ -82,6 +83,7 @@ public partial class SettingsMenu : MarginContainer {
 		ShowConfirmationPopup(false, _confirmationType[1]);
 		UI.Instance.ShowSettingsMenu(false);
 		UI.Instance.ShowMainMenu(true);
+		UI.Instance.ChangeMainMenuBool(true);
 	}
 	
 	private void ConfirmationNoButtonPressed() {
@@ -91,6 +93,7 @@ public partial class SettingsMenu : MarginContainer {
 		ShowConfirmationPopup(false, _confirmationType[1]);
 		UI.Instance.ShowSettingsMenu(false);
 		UI.Instance.ShowMainMenu(true);
+		UI.Instance.ChangeMainMenuBool(true);
 	}
 
 	private void ConfirmationReturnButtonPressed() {

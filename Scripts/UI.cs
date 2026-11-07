@@ -76,6 +76,9 @@ public partial class UI : CanvasLayer {
 
 	public void ShowMainMenu(bool value) {
 		_mainMenu.Visible = value;
+	}
+
+	public void ChangeMainMenuBool(bool value) {
 		_inMainMenu = value;
 	}
 

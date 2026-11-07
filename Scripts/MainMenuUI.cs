@@ -22,8 +22,10 @@ public partial class MainMenuUI : MarginContainer{
 	private void PlayerInLobby(bool inLobby) {
 		if (inLobby) {
 			UI.Instance.ShowMainMenu(inLobby);
+			UI.Instance.ChangeMainMenuBool(inLobby);
 		} else {
 			UI.Instance.ShowMainMenu(inLobby);
+			UI.Instance.ChangeMainMenuBool(inLobby);
 			PlayerController.Instance.ChangeMouseCapturing(true);
 		}
 	}

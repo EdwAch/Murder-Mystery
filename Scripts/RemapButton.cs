@@ -17,10 +17,35 @@ public partial class RemapButton : Button {
 		};
     }
 
+	private static bool IsReservedKey(Key key) => key == Key.Meta || key == Key.Hyper || key == Key.Menu || key == Key.None || key == Key.Unknown || (key >= Key.F1 && key <= Key.F35);
+
+	private bool IsKeyAlreadyInUse(Key key) {
+		foreach (StringName action in InputMap.GetActions()) {
+			string actionName = action.ToString();
+			if (actionName == _name) continue;
+			if (actionName.StartsWith("ui_")) continue;
+
+			foreach (InputEvent ev in InputMap.ActionGetEvents(action)) {
+				if (ev is InputEventKey k && k.PhysicalKeycode == key) return true;
+			}
+		}
+		return false;
+	}
+
     public override void _UnhandledKeyInput(InputEvent @event) {
         if (!_listeningForInput) return;
 
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.IsEcho()) {
+			Key KEY = keyEvent.PhysicalKeycode;
+
+			if (IsReservedKey(KEY)) {
+				this.Text = "Key not allowed";
+				return;
+			}
+			if (IsKeyAlreadyInUse(KEY)) {
+				this.Text = "Key already in use";
+				return;
+			}
 			InputMap.ActionEraseEvents(_name);
 
 			var physicalEvent = new InputEventKey {
